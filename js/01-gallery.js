@@ -22,9 +22,15 @@ function bigPicture(evt) {
     return;
   }
 
-  const bigImgModal = basicLightbox.create(`
-    <img src="${evt.target.srcset}">
-`);
+  const bigImgModal = basicLightbox.create(
+    `
+    <img src="${evt.target.srcset}">`,
+    {
+      onClose: () => {
+        window.removeEventListener("keydown", closeBigImgModal);
+      },
+    }
+  );
 
   bigImgModal.show();
 
@@ -37,7 +43,7 @@ function bigPicture(evt) {
     } else {
       return;
     }
-    window.removeEventListener("keydown", closeBigImgModal);
+    //   window.removeEventListener("keydown", closeBigImgModal);
     console.log(evt);
   }
 }
