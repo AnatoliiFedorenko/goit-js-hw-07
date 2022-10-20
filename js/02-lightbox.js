@@ -26,4 +26,7 @@ function bigPicture(evt) {
   }
 }
 
-var slider = new SimpleLightbox(".gallery a", {});
+var slider = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionsDelay: 250,
+});
