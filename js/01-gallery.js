@@ -16,14 +16,28 @@ const gallery = galleryItems
 galleryContainer.insertAdjacentHTML("afterbegin", gallery);
 
 galleryContainer.addEventListener("click", bigPicture);
+
 function bigPicture(evt) {
   if (evt.target.nodeName !== "IMG") {
     return;
   }
 
-  const instance = basicLightbox.create(`
+  const bigImgModal = basicLightbox.create(`
     <img src="${evt.target.srcset}">
 `);
 
-  instance.show();
+  bigImgModal.show();
+
+  window.addEventListener("keydown", closeBigImgModal);
+  function closeBigImgModal(evt) {
+    const ESC_KEY_CODE = "Escape";
+    const isEscKey = evt.code === ESC_KEY_CODE;
+    if (isEscKey) {
+      bigImgModal.close();
+    } else {
+      return;
+    }
+    window.removeEventListener("keydown", closeBigImgModal);
+    console.log(evt);
+  }
 }
